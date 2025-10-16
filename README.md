@@ -1,14 +1,6 @@
-# To Clone this repo and use:
-     git clone --branch master https://github.com/hardora/oracle.git
-     cd oracle
-     npm install
-     npm start
+
    - Download Expo App
    - Scan the QRCODE with your Expo App 
-   
- - The smart contracts for both token and oracle can be found here in oracle/HardoraVenom/contracts
- - Frontend: Oracle/frontend/hadera
-   
    
    
 Hardora Oracle
