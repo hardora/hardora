@@ -19,28 +19,28 @@ Current decentralized oracles operate their own blockchain network, which has it
 
 ## OUR APPROACH
 - **Decentralization:**
-We are democratizing Oracle service for applications running on any blockchain network, which ensures the integrity of the Oracle network and thus the information provided. Any smart contract can query data from the oracle's smart contract. This is achieved by allowing nodes to run on mobile computing devices like Android phones while also allowing thousands of people to join the network and become node operators.
+We are democratizing Oracle service for applications running on any blockchain or DLT network, which ensures the integrity of the Oracle network and thus the information provided. Any smart contract can query data from the oracle's smart contract. This is achieved by allowing nodes to run on mobile computing devices like Android phones while also allowing thousands of people to join the network and become node operators.
 - **Low setup cost and easy setup:**
 To ensure low operation and setup costs, the Oracle nodes will operate on mobile computing devices, which offer more efficient power consumption for computation while leveraging the accessibility and availability of mobile devices. There is no need for a complex setup; all that will be required is to download the application, connect a wallet, connect the required hardware device(optional), and stake some tokens to finalize registration. In just a few minutes, a user can set up a node that will be recognized by the entire network.
 - **Easy integration:**
-The Hardora architecture is designed to allow easy integration with any DApp on Hedera network. The Oracle Controller (smart contract) runs on the blockchain itself, while the nodes run off-chain on mobile devices.
+The Hardora architecture is designed to allow easy integration with any DApp on Hedera network. The Oracle Controller (smart contract) runs on the HSC itself, while the nodes run off-chain on mobile devices.
 - **Scalability:**
 Scalability is one big issue that is addressed by our decentralized and mobile approach. The goal is to ensure that as more DApps are created on Hedera, the nodes can keep generating and validating data for on-chain usage by DApps and even off-chain apps.
 
 ![node architecture low.png](https://cdn.dorahacks.io/static/files/188a29971c8c29530d0fba74376985e7.png)
 
 ## The Architecture of the Hardora Oracle
-Highlighted below are some of the core elements of the Hardora blockchain network, which are:
-- A JRPC node that connects the mobile oracle to the Hedera blockchain
+Highlighted below are some of the core elements of the Hardora network, which are:
+- A RPC node that connects the mobile oracle to the Hedera network
 - A mobile device (referred to as mobile Oracle in this context) running the Oracle node app
 - An optional hardware device not shown in the general overview
 
-The image below shows how the mobile Oracle communicates with a blockchain node in order to interact with the Oracle smart contracts running on the Hedera network.
+The image below shows how the mobile Oracle communicates with a mirror node in order to interact with the Oracle smart contracts running on the Hedera network.
 
 ## How the protocol works
 The Hardora Oracle Network consists primarily of three core elements: an Oracle controller (smart contract), a mobile device, and a hardware device. In order to create a scalable and decentralized Oracle network, the Hardora Oracle network was designed to run on a mobile device, which is accessible to over 6 billion people worldwide and is connected to the internet almost all the time. This is important in countries where people don’t have access to a robust internet infrastructure to provide the constant service required by an Oracle network.
 
-The blockchain node (RPC/graphql) serves transaction data from the nodes to the mobile Oracle node app, which is basically a wallet but much more. The mobile device itself is the physical device on which the node app runs, similar to how smart contracts run on the Hedera blockchain. The node app on the device is connected to a dedicated hardware device similar to a hardware wallet, which performs non-deterministic calculations off-chain while the node app itself performs deterministic computations that can be computed by other Oracle nodes. The node app, through an open and trusted API, can query data like price data and sport data, among many others, for use by DApps running on the Hedera blockchain.
+The blockchain node (RPC/graphql) serves transaction data from the nodes to the mobile Oracle node app, which is basically a wallet but much more. The mobile device itself is the physical device on which the node app runs, similar to how smart contracts run on the Hedera network. The node app on the device is connected to a dedicated hardware device similar to a hardware wallet, which performs non-deterministic calculations off-chain while the node app itself performs deterministic computations that can be computed by other Oracle nodes. The node app, through an open and trusted API, can query data like price data and sport data, among many others, for use by DApps running on the Hedera network.
 The essence of the Hardora oracle is to provide off-chain data that would otherwise be expensive to execute or impossible to access by DApps running on the network.
 
 Combining a mobile device and a dedicated hardware device ensures we can serve quality data that is either deterministic or not, based on the demand of the DApps requesting those data. The data services provided by the protocol will include generating random numbers, computing the hash of a file, verifying data stored in a decentralized database like Polybase, and many others.
