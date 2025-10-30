@@ -6,7 +6,7 @@
 Hardora Oracle
 
 ## Introduction
-The Hardora Oracle is a decentralized mobile-first hardware compute-enabled oracle for off-chain data computation, such as verifiable true random number generation. The emphasis is on a decentralized, hardware-based, and mobile-first oracle for any DApps on the Hedera Workchain to access offchain data.
+The Hardora Oracle is a decentralized mobile-first hardware compute-enabled oracle for off-chain data computation, such as verifiable true random number generation. The emphasis is on a decentralized, hardware-based, and mobile-first oracle for any DApps on the Hedera network to access offchain data.
 
 ## Problems with Existing ORACLES
 The following issues were identified with current oracles:
