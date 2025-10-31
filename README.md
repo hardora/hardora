@@ -146,3 +146,4 @@ There are several use cases for the hardora oracle including those highlighted b
 Important link and address
 - Oracle address: 
 - Landing page: https://hadoralandingpage.vercel.app/
+- Certificate: https://drive.google.com/file/d/1tAWQLDrvKxBQxiZoBV_oyX7a8oBt3hk8/view?usp=drivesdk
