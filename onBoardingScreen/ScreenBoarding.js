@@ -58,7 +58,7 @@ const Skip = ({ isLight, skipLabel, ...props }) => (
 
 const Next = ({ isLight, ...props }) => (
   <Pressable {...props} >
-    <Ionicons name="arrow-forward" size={30} color="#fff" />
+    <Ionicons name="arrow-forward" size={26} color="#fff" />
 
     {/* <Button
       title={"Next"}

@@ -2,13 +2,26 @@ import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
 import { Image, SafeAreaView, StyleSheet, View } from "react-native";
 import { Color } from "../constant/Color";
+import { useHedera } from "../context/HederaContext";
 
 const SplashScreen = ({ navigation }) => {
+  const { wallet, walletHydrated } = useHedera();
+
   useEffect(() => {
-    setTimeout(() => {
-      navigation.navigate("Home");
-    }, 2000);
-  }, []);
+    if (!walletHydrated) {
+      return;
+    }
+
+    const targetRoute = wallet ? "AccountDashboard" : "Home";
+    const timeout = setTimeout(() => {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: targetRoute }],
+      });
+    }, 1500);
+
+    return () => clearTimeout(timeout);
+  }, [navigation, wallet, walletHydrated]);
 
   return (
     <>
@@ -16,11 +29,11 @@ const SplashScreen = ({ navigation }) => {
       <View style={styles.rootContainer}>
         <View style={styles.logoImage}>
           <SafeAreaView>
-            <Image source={require("../assets/images/logo.png")} />
+            {/* <Image source={require("../assets/images/logo.png")} /> */}
           </SafeAreaView>
         </View>
         <View style={styles.nodeImage}>
-          <Image source={require("../assets/images/illus.png")} />
+          {/* <Image source={require("../assets/images/illus.png")} /> */}
         </View>
       </View>
     </>

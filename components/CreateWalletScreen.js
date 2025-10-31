@@ -25,7 +25,7 @@ function CreateWalletScreen() {
     <ScrollView style={styles.container}>
       <View style={styles.container}>
         <View style={styles.logo}>
-          <Image source={require("../assets/images/logo_s.png")} />
+          {/* <Image source={require("../assets/images/logo_s.png")} /> */}
         </View>
 
         <View style={styles.swiperTextHolder}>
@@ -54,9 +54,9 @@ function CreateWalletScreen() {
               <Text
                 style={[styles.text, { marginHorizontal: 15, color: Color.bg }]}
               >
-                Create Node ID
+                Create Hedera Wallet
               </Text>
-              <FontAwesome name="chain" color={Color.bg} size={30} />
+              <FontAwesome name="chain" color={Color.bg} size={26} />
             </View>
           </Pressable>
 
@@ -82,7 +82,7 @@ function CreateWalletScreen() {
               >
                 Import Existing ID{" "}
               </Text>
-              <MaterialIcons name="import-export" color="#f5f5f5" size={30} />
+              <MaterialIcons name="import-export" color="#f5f5f5" size={26} />
             </View>
           </Pressable>
         </View>
@@ -128,6 +128,10 @@ const styles = StyleSheet.create({
     fontSize: 36,
     fontWeight: 700,
     marginHorizontal: 20,
+  },
+  text: {
+    fontSize: 20,
+    color: "#f5f5f5",
   },
 
   logo: {

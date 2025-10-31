@@ -34,14 +34,14 @@ function SecondScreen({ navigation }) {
           </View>
         </SafeAreaView>
         <View style={styles.logo}>
-          <Image source={require("../../assets/images/logo_s.png")} />
+          {/* <Image source={require("../../assets/images/logo_s.png")} /> */}
         </View>
         <View style={styles.imageHolder}>
-          <Image
+          {/* <Image
             resizeMode="contain"
             style={{}}
             source={require("../../assets/images/mobile-first.png")}
-          />
+          /> */}
         </View>
 
         <View style={styles.swiperTextHolder}>
@@ -83,7 +83,7 @@ function SecondScreen({ navigation }) {
                 {" "}
                 Next{" "}
               </Text>
-              <Ionicons name="arrow-forward" color={Color.bg} size={30} />
+              <Ionicons name="arrow-forward" color={Color.bg} size={26} />
             </View>
           </Pressable>
         </View>
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "white",
-    fontSize: 20,
+    fontSize: 18,
   },
   buttonHolder: {
     marginVertical: 30,

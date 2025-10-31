@@ -22,7 +22,7 @@ export default function Settings() {
         </View>
 
         <View>
-          <Image source={require("../assets/images/cpu-setting.png")} />
+          {/* <Image source={require("../assets/images/cpu-setting.png")} /> */}
           <Text style={styles.description}>
             Please insert device and click the button below
           </Text>
@@ -46,7 +46,7 @@ export default function Settings() {
         </View>
         <Pressable onPress={nextHandlerHome}>
           <View style={styles.home}>
-            <Ionicons name="home-outline" color="#f5f5f5" size={30} />
+            <Ionicons name="home-outline" color="#f5f5f5" size={26} />
           </View>
         </Pressable>
       </View>
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffc000",
     padding: 5,
     borderRadius: 35,
-    fontSize: 24,
+    fontSize: 20,
     textAlign: "center",
   },
   text: {

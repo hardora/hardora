@@ -1,248 +1,240 @@
-import { StatusBar } from "expo-status-bar";
-import {
-  Image,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-} from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Color } from "../constant/Color";
 import { useNavigation } from "@react-navigation/native";
-import { ImageBackground } from "react-native";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
-  function nextHandlerHome() {
-    navigation.navigate("AccountDashboard");
-  }
-  function nextHandler() {
-    navigation.navigate("TrustedDevices");
-  }
-  function nextHandlerStake() {
-    navigation.navigate("StakeToken");
-  }
-  function nextHandlerAccount() {
-    navigation.navigate("AccountInformation");
-  }
-  function nextHandlerDevice() {
-    navigation.navigate("DeviceInfo");
-  }
-  function nextHandlerSettings() {
-    navigation.navigate("Settings");
-  }
+
+  const quickActions = [
+    { icon: "add-outline", label: "Buy" },
+    { icon: "arrow-down-outline", label: "Receive" },
+    { icon: "arrow-up-outline", label: "Send" },
+    { icon: "grid-outline", label: "More" },
+  ];
+
+  const managementItems = [
+    {
+      icon: "add-circle-outline",
+      label: "Connect Trusted Device",
+      onPress: () => navigation.navigate("TrustedDevices"),
+    },
+    {
+      icon: "wallet-outline",
+      label: "Stake Token",
+      onPress: () => navigation.navigate("StakeToken"),
+    },
+    {
+      icon: "document-attach-outline",
+      label: "Account Information",
+      onPress: () => navigation.navigate("AccountInformation"),
+    },
+    {
+      icon: "information-circle-outline",
+      label: "Trusted Device Info",
+      onPress: () => navigation.navigate("DeviceInfo"),
+    },
+    {
+      icon: "settings-outline",
+      label: "Settings",
+      onPress: () => navigation.navigate("Settings"),
+    },
+  ];
+
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.right}>
-        <Ionicons name="add-outline" color="#f5f5f5" size={30} />
-        <Text style={styles.text}>Add Username</Text>
-      </View>
-      <View>
-        <View style={styles.rowed}>
-          <Text style={styles.text}>Available Balance</Text>
-          <Image source={require("../assets/images/Vector.png")} />
-        </View>
-        <View style={styles.accountInfo}>
-          <Image
-            source={require("../assets/images/app-logo.png")}
-            style={styles.logo}
-          />
-          <Text style={styles.amount}>23.008</Text>
-        </View>
-        <View style={styles.line}>
-          <Text style={styles.text}>Equiv: $500.27</Text>
-          <Text style={styles.text}>Validation: 17</Text>
-        </View>
-        <View style={styles.row}>
-          <View style={styles.col}>
-            <Ionicons
-              style={styles.ion}
-              name="add-outline"
-              color={Color.bg}
-              size={24}
-            />
-            <Text style={styles.action}>Buy</Text>
-          </View>
-          <View style={styles.col}>
-            <Ionicons
-              style={styles.ion}
-              name="arrow-down-outline"
-              color={Color.bg}
-              size={24}
-            />
-            <Text style={styles.action}>Receive</Text>
-          </View>
-          <View style={styles.col}>
-            <Ionicons
-              style={styles.ion}
-              name="arrow-up-outline"
-              color={Color.bg}
-              size={24}
-            />
-            <Text style={styles.action}>Send</Text>
-          </View>
-          <View style={styles.col}>
-            <Ionicons
-              style={styles.ion}
-              name="grid-outline"
-              color={Color.bg}
-              size={24}
-            />
-            <Text style={styles.action}>More</Text>
-          </View>
-        </View>
-      </View>
-      <ImageBackground
-        source={require("../assets/images/bg2.png")}
-        resizeMode="cover"
+    <SafeAreaView style={styles.screen}>
+      <ScrollView
+        contentContainerStyle={styles.content}
+        showsVerticalScrollIndicator={false}
       >
-        <View style={styles.account}>
-          <View>
-            <Pressable onPress={nextHandler}>
-              <View style={styles.clicks}>
-                <Ionicons name="add-circle-outline" color="#ffc000" size={30} />
-                <Text style={styles.click}>Connect Trusted Device</Text>
-              </View>
-            </Pressable>
-            <Pressable onPress={nextHandlerStake}>
-              <View style={styles.clicks}>
-                <Ionicons name="wallet-outline" color="#ffc000" size={30} />
-                <Text style={styles.click}>Stake Token</Text>
-              </View>
-            </Pressable>
-            <Pressable onPress={nextHandlerAccount}>
-              <View style={styles.clicks}>
-                <Ionicons
-                  name="document-attach-outline"
-                  color="#ffc000"
-                  size={30}
-                />
-                <Text style={styles.click}>Account Information</Text>
-              </View>
-            </Pressable>
-            <Pressable onPress={nextHandlerDevice}>
-              <View style={styles.clicks}>
-                <Ionicons
-                  name="information-circle-outline"
-                  color="#ffc000"
-                  size={30}
-                />
-                <Text style={styles.click}>Trusted Device Info</Text>
-              </View>
-            </Pressable>
-            <Pressable>
-              <View style={styles.clicks}>
-                <Ionicons name="settings-outline" color="#ffc000" size={30} />
-                <Text style={styles.click}>Settings</Text>
-              </View>
-            </Pressable>
-          </View>
-          <Pressable onPress={nextHandlerHome}>
-            <View style={styles.home}>
-              <Ionicons name="home-outline" color="#f5f5f5" size={30} />
-            </View>
+        <View style={styles.topBar}>
+          <Text style={styles.title}>Dashboard</Text>
+          <Pressable style={styles.usernameButton}>
+            <Ionicons name="add-outline" color={Color.bg} size={18} />
+            <Text style={styles.usernameText}>Add Username</Text>
           </Pressable>
         </View>
-      </ImageBackground>
-    </ScrollView>
+
+        <View style={styles.balanceCard}>
+          <View style={styles.balanceHeader}>
+            <Text style={styles.subtleText}>Available Balance</Text>
+          </View>
+          <Text style={styles.amount}>23.008</Text>
+          <View style={styles.balanceMeta}>
+            <Text style={styles.metaText}>Equiv: $500.27</Text>
+            <Text style={styles.metaText}>Validation: 17</Text>
+          </View>
+
+          <View style={styles.quickActionsRow}>
+            {quickActions.map((action) => (
+              <View style={styles.quickCard} key={action.label}>
+                <View style={styles.quickIcon}>
+                  <Ionicons name={action.icon} color="#f5f5f5" size={18} />
+                </View>
+                <Text style={styles.quickLabel}>{action.label}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
+
+        <View style={styles.sectionCard}>
+          <Text style={styles.sectionTitle}>Manage Account</Text>
+          <ScrollView
+            style={styles.sectionList}
+            contentContainerStyle={styles.sectionListContent}
+            showsVerticalScrollIndicator={false}
+          >
+            {managementItems.map((item, index) => (
+              <Pressable
+                style={[
+                  styles.sectionItem,
+                  index === managementItems.length - 1 && styles.sectionItemLast,
+                ]}
+                key={item.label}
+                onPress={item.onPress}
+              >
+                <View style={styles.sectionIcon}>
+                  <Ionicons name={item.icon} color="#ffc000" size={22} />
+                </View>
+                <Text style={styles.sectionLabel}>{item.label}</Text>
+                <Ionicons name="chevron-forward" color="#9ca3af" size={18} />
+              </Pressable>
+            ))}
+          </ScrollView>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
     backgroundColor: Color.bg,
   },
-  right: {
+  content: {
+    paddingHorizontal: 20,
+    paddingBottom: 32,
+    gap: 24,
+  },
+  topBar: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 16,
+  },
+  title: {
+    color: "#f5f5f5",
+    fontSize: 28,
+    fontWeight: "700",
+  },
+  usernameButton: {
+    backgroundColor: "#f5f5f5",
+    borderRadius: 24,
+    paddingHorizontal: 14,
+    paddingVertical: 6,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "flex-end",
-    gap: 10,
-    marginVertical: 10,
+    gap: 8,
   },
-  logo: { width: 20, height: 20 },
-  text: {
-    color: "#f5f5f5",
-    fontSize: 20,
-    marginHorizontal: 20,
-    marginVertical: 5,
+  usernameText: {
+    color: Color.bg,
+    fontSize: 14,
+    fontWeight: "600",
   },
-  action: {
+  balanceCard: {
+    backgroundColor: "rgba(255, 255, 255, 0.08)",
+    borderRadius: 24,
+    paddingHorizontal: 20,
+    paddingVertical: 24,
+    gap: 16,
+  },
+  balanceHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  subtleText: {
     color: "#f5f5f5",
-    fontSize: 20,
-    marginVertical: 5,
+    opacity: 0.7,
+    fontSize: 16,
   },
   amount: {
     color: "#f5f5f5",
-    marginHorizontal: 10,
-    fontSize: 40,
-    fontWeight: 700,
+    fontSize: 42,
+    fontWeight: "700",
   },
-  row: {
+  balanceMeta: {
     flexDirection: "row",
-    marginVertical: 10,
     justifyContent: "space-between",
-    width: "60%",
-    marginHorizontal: 20,
-    alignItems: "center",
   },
-  rowed: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginHorizontal: 10,
-  },
-  accountInfo: {
-    flexDirection: "row",
-    marginLeft: 30,
-    alignItems: "center",
-  },
-  line: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginHorizontal: 10,
-  },
-  col: {
-    alignItems: "center",
-    gap: 5,
-  },
-  ion: {
-    padding: 12,
-    backgroundColor: "#f5f5f5",
-    borderRadius: 10,
-  },
-  account: {
-    backgroundColor: "#f5f5f5",
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 20,
-    justifyContent: "center",
-  },
-  clicks: {
-    backgroundColor: Color.bg,
-    borderRadius: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 10,
-    gap: 20,
-    marginVertical: 5,
-  },
-  click: {
+  metaText: {
     color: "#f5f5f5",
-    fontSize: 24,
+    fontSize: 14,
+    opacity: 0.8,
   },
-  home: {
-    backgroundColor: Color.bg,
-    borderRadius: 50,
-    padding: 15,
-    justifyContent: "center",
+  quickActionsRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingTop: 4,
+  },
+  quickCard: {
     alignItems: "center",
-    flexDirection: "column",
-    width: "20%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginTop: 15,
+    width: "24%",
+    gap: 12,
+  },
+  quickIcon: {
+    backgroundColor: "rgba(255, 255, 255, 0.12)",
+    borderRadius: 999,
+    padding: 12,
+  },
+  quickLabel: {
+    color: "#f5f5f5",
+    fontSize: 12,
+    fontWeight: "600",
+  },
+  sectionCard: {
+    backgroundColor: "#f5f5f5",
+    borderRadius: 24,
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    gap: 12,
+    marginHorizontal: -20,
+  },
+  sectionTitle: {
+    color: Color.bg,
+    fontSize: 16,
+    fontWeight: "700",
+    marginBottom: 6,
+  },
+  sectionList: {
+    maxHeight: 270,
+  },
+  sectionListContent: {
+    paddingBottom: 4,
+  },
+  sectionItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 14,
+    borderBottomWidth: 1,
+    borderBottomColor: "rgba(17, 20, 50, 0.08)",
+  },
+  sectionItemLast: {
+    borderBottomWidth: 0,
+  },
+  sectionIcon: {
+    backgroundColor: "rgba(255, 192, 0, 0.12)",
+    borderRadius: 14,
+    padding: 10,
+    marginRight: 16,
+  },
+  sectionLabel: {
+    flex: 1,
+    color: Color.bg,
+    fontSize: 16,
+    fontWeight: "500",
   },
 });

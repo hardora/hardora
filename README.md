@@ -8,6 +8,81 @@ Hardora Oracle
 ## Introduction
 The Hardora Oracle is a decentralized mobile-first hardware compute-enabled oracle for off-chain data computation, such as verifiable true random number generation. The emphasis is on a decentralized, hardware-based, and mobile-first oracle for any DApps on the Hedera network to access offchain data.
 
+## Hedera Integration (Mobile Wallet)
+- Generate Hedera-compatible Ed25519 key pairs directly on device; keys never leave the client.
+- Present a 12-word BIP39-style seed phrase during onboarding and require users to confirm the word order.
+- Configure a Hedera Consensus Service topic and stream device sensor readings (barometer by default) into it.
+- Subscribe to the topic via the Mirror Node API and display decoded messages inside the Device Information screen.
+
+### Configuring Mirror Node access
+Update `app.json` with credentials issued from the [Hedera Portal](https://portal.hedera.com/) (or another relay) so the app can create topics and submit messages:
+
+```json
+{
+  "expo": {
+    "extra": {
+      "hedera": {
+        "mirrorNodeBaseUrl": "https://testnet.mirrornode.hedera.com/api/v1",
+        "apiKey": "<YOUR_API_KEY>"
+      }
+    }
+  }
+}
+```
+
+Without a valid API key the UI still generates wallets, but topic creation and message streaming will fail with an authorization error.
+
+### Sensor streaming notes
+- Barometer readings publish every ~4 seconds while streaming is active to avoid exhausting rate limits.
+- You can swap to other sensors (GPS, temperature, etc.) by adjusting `components/DeviceInfo.js` – reuse `publishMessage` with the payload you need.
+- Topic polling uses the Hedera Mirror Node REST API; adjust the poll interval in `context/HederaContext.js` if required.
+
+### Account provisioning backend
+Creating a Hedera account requires an existing funded operator key. For security reasons that logic should live on a backend service you control. Configure the endpoint in `app.json`:
+
+```json
+{
+  "expo": {
+    "extra": {
+      "hedera": {
+        "accountCreationUrl": "https://your-api.example.com/accounts"
+      }
+    }
+  }
+}
+```
+
+Example Node.js endpoint using `@hashgraph/sdk`:
+
+```ts
+import express from "express";
+import { AccountCreateTransaction, Client, Hbar, PrivateKey, PublicKey } from "@hashgraph/sdk";
+
+const app = express();
+app.use(express.json());
+
+const operatorId = process.env.HEDERA_OPERATOR_ID;
+const operatorKey = PrivateKey.fromString(process.env.HEDERA_OPERATOR_KEY);
+
+app.post("/accounts", async (req, res) => {
+  const { publicKeyDer, network = "testnet" } = req.body || {};
+  if (!publicKeyDer) {
+    return res.status(400).json({ message: "publicKeyDer is required" });
+  }
+
+  const client = Client.forName(network).setOperator(operatorId, operatorKey);
+  const txn = await new AccountCreateTransaction()
+    .setKey(PublicKey.fromStringDer(publicKeyDer))
+    .setInitialBalance(new Hbar(10))
+    .execute(client);
+
+  const receipt = await txn.getReceipt(client);
+  return res.json({ accountId: receipt.accountId?.toString() });
+});
+```
+
+The mobile app POSTs the new `publicKeyDer` automatically after wallet creation. If `accountCreationUrl` is omitted, the UI still generates keys but skips the provisioning call.
+
 ## Problems with Existing ORACLES
 The following issues were identified with current oracles:
 - **Centralization:**

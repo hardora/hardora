@@ -1,13 +1,14 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Image, Pressable, StyleSheet, ScrollView } from "react-native";
-import { Text } from "react-native";
-import { View } from "react-native";
+import { Pressable, StyleSheet, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { truncateKey } from "../chainz/hederaWallet";
 import { Color } from "../constant/Color";
+import { useHedera } from "../context/HederaContext";
 
 export default function ProceedToHome() {
   const navigation = useNavigation();
+  const { wallet, topic, account, accountStatus } = useHedera();
 
   function nextHandler() {
     navigation.navigate("AccountDashboard");
@@ -17,22 +18,36 @@ export default function ProceedToHome() {
     <ScrollView style={styles.container}>
       <View style={styles.container}>
         <View style={styles.logo}>
-          <Image source={require("../assets/images/logo_s.png")} />
+          {/* <Image source={require("../assets/images/logo_s.png")} /> */}
         </View>
         <View>
           <Text style={styles.textBig}>Congratulations!</Text>
         </View>
 
-        <View>
-          <Text style={styles.description}>
-            Your Node Id has been created successfully. Your new wallet address
-            is:
+        <View style={styles.walletCard}>
+          <Text style={styles.walletLabel}>Hedera Public Key</Text>
+          <Text style={styles.walletValue}>
+            {wallet ? truncateKey(wallet.publicKeyDer, { visible: 12 }) : "No wallet available"}
           </Text>
         </View>
 
-        <View style={styles.img}>
-          <Image source={require("../assets/images/home.png")} />
-        </View>
+        {topic?.topicId && (
+          <View style={styles.walletCard}>
+            <Text style={styles.walletLabel}>Device Topic ID</Text>
+            <Text style={styles.walletValue}>{topic.topicId}</Text>
+          </View>
+        )}
+
+        {account?.accountId && (
+          <View style={styles.walletCard}>
+            <Text style={styles.walletLabel}>Hedera Account</Text>
+            <Text style={styles.walletValue}>{account.accountId}</Text>
+          </View>
+        )}
+
+        {accountStatus?.error && (
+          <Text style={styles.errorText}>Account provisioning failed: {accountStatus.error}</Text>
+        )}
 
         <View style={styles.buttonHolder}>
           <Pressable
@@ -74,7 +89,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffc000",
     padding: 5,
     borderRadius: 35,
-    fontSize: 24,
+    fontSize: 20,
     textAlign: "center",
   },
   text: {
@@ -99,11 +114,33 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  img: {
-    marginTop: 60,
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
+  walletCard: {
+    backgroundColor: "rgba(255, 255, 255, 0.08)",
+    marginHorizontal: 24,
+    borderRadius: 24,
+    paddingVertical: 18,
+    paddingHorizontal: 20,
+    marginTop: 24,
+    gap: 8,
+  },
+  walletLabel: {
+    color: "#f5f5f5",
+    opacity: 0.75,
+    fontSize: 14,
+    textAlign: "center",
+  },
+  walletValue: {
+    color: "#f5f5f5",
+    fontSize: 16,
+    textAlign: "center",
+    fontWeight: "600",
+  },
+  errorText: {
+    color: "#ffb4ab",
+    textAlign: "center",
+    marginHorizontal: 24,
+    marginTop: 16,
+    fontSize: 14,
   },
 
   container: {

@@ -1,190 +1,151 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
-import { Image, ImageBackground, Pressable } from "react-native";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Color } from "../constant/Color";
 
 export default function StakeToken() {
   const navigation = useNavigation();
-  function nextHandler() {
-    navigation.navigate("ValidateStake");
-  }
-  function nextHandlerHome() {
-    navigation.navigate("AccountDashboard");
-  }
+
   return (
-    <ScrollView style={styles.container}>
-      <View>
-        <View style={styles.row}>
+    <SafeAreaView style={styles.screen}>
+      <ScrollView
+        contentContainerStyle={styles.content}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.header}>
           <Ionicons
-            onPress={nextHandlerHome}
             name="arrow-back-outline"
             color="#f5f5f5"
-            size={30}
+            size={26}
+            onPress={() => navigation.navigate("AccountDashboard")}
           />
-          <Text style={styles.textBig}>Stake Token</Text>
+          <Text style={styles.title}>Stake Token</Text>
         </View>
-        <View>
-          <View style={styles.rowed}>
-            <Text style={styles.text}>Available Balance</Text>
-          </View>
-          <View style={styles.accountInfo}>
-            <Image
-              source={require("../assets/images/app-logo.png")}
-              style={styles.logo}
-            />
-            <Text style={styles.amount}>23.008</Text>
-          </View>
-          <View style={styles.line}>
-            <Text style={styles.text}>Equiv: $500.27</Text>
-          </View>
+
+        <View style={styles.balanceCard}>
+          <Text style={styles.subtleText}>Available Balance</Text>
+          <Text style={styles.balanceValue}>23.008</Text>
+          <Text style={styles.metaText}>Equiv: $500.27</Text>
         </View>
-        <ImageBackground
-          source={require("../assets/images/bg.png")}
-          resizeMode="cover"
-        >
-          <View style={styles.col}>
-            <Text style={styles.textBig}>Amount To Stake</Text>
-            <Text style={styles.textBigger}>10.00</Text>
-          </View>
 
-          <View>
-            <Text style={styles.textsm}>
-              Please note: You are about to stake 10.00 Hardora token as a
-              node/validator. Click the button below to validate your stake.
-            </Text>
-          </View>
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>Amount To Stake</Text>
+          <Text style={styles.stakeAmount}>10.00</Text>
 
-          <View style={styles.buttonHolder}>
-            <Pressable
-              onPress={nextHandler}
-              style={
-                ([({ pressed }) => pressed && styles.pressed],
-                styles.nextButton)
-              }
-            >
-              <View
-                style={{
-                  marginHorizontal: 10,
-                }}
-              >
-                <Text style={styles.next}>Stake</Text>
-              </View>
-            </Pressable>
-          </View>
-          <Pressable onPress={nextHandlerHome}>
-            <View style={styles.home}>
-              <Ionicons name="home-outline" color="#f5f5f5" size={30} />
-            </View>
+          <Text style={styles.description}>
+            You are about to stake 10.00 Hardora tokens as a
+            node/validator. Ensure you have reviewed the details before
+            proceeding to validate the stake.
+          </Text>
+
+          <Pressable
+            style={styles.primaryButton}
+            onPress={() => navigation.navigate("ValidateStake")}
+          >
+            <Text style={styles.primaryText}>Stake Now</Text>
           </Pressable>
-        </ImageBackground>
-      </View>
-    </ScrollView>
+        </View>
+
+        <Pressable
+          style={styles.homeButton}
+          onPress={() => navigation.navigate("AccountDashboard")}
+        >
+          <Ionicons name="home-outline" color="#f5f5f5" size={26} />
+        </Pressable>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  pressed: {
-    opacity: 0.7,
-  },
-  row: {
-    flexDirection: "row",
-    marginHorizontal: 20,
-    justifyContent: "space-between",
-    marginTop: 40,
-    marginBottom: 20,
-  },
-  amount: {
-    color: "#f5f5f5",
-    marginHorizontal: 10,
-    fontSize: 40,
-    fontWeight: 700,
-  },
-  logo: { width: 20, height: 20 },
-  rowed: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginHorizontal: 10,
-  },
-  accountInfo: {
-    flexDirection: "row",
-    marginLeft: 30,
-    alignItems: "center",
-  },
-  line: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginHorizontal: 10,
-  },
-  col: {
-    alignItems: "center",
-    gap: 10,
-    marginVertical: 30,
-  },
-  nextButton: {
-    backgroundColor: "#ffc000",
-    padding: 5,
-    borderRadius: 35,
-    marginTop: 20,
-  },
-  next: {
-    backgroundColor: "#ffc000",
-    padding: 5,
-    borderRadius: 35,
-    fontSize: 24,
-    textAlign: "center",
-  },
-  text: {
-    color: "#f5f5f5",
-    fontSize: 20,
-    marginHorizontal: 20,
-    marginVertical: 5,
-  },
-  textsm: {
-    color: "#f5f5f5",
-    fontSize: 18,
-    paddingHorizontal: 40,
-    textAlign: "center",
-    marginTop: 80,
-  },
-  textBig: {
-    color: "#f5f5f5",
-    fontSize: 24,
-    textAlign: "center",
-  },
-  textBigger: {
-    color: "#f5f5f5",
-    fontSize: 45,
-    fontWeight: 700,
-    textAlign: "center",
-    borderColor: "#f5f5f5",
-    borderWidth: 1,
-    borderRadius: 30,
-    padding: 5,
-  },
-  buttonHolder: {
-    borderRadius: 40,
-    marginBottom: 30,
-    paddingHorizontal: 60,
-    justifyContent: "center",
-  },
-  container: {
+  screen: {
     flex: 1,
     backgroundColor: Color.bg,
   },
-  home: {
-    backgroundColor: Color.bg,
-    borderRadius: 50,
-    padding: 15,
-    justifyContent: "center",
+  content: {
+    paddingHorizontal: 20,
+    paddingBottom: 32,
+    gap: 24,
+  },
+  header: {
+    flexDirection: "row",
     alignItems: "center",
-    flexDirection: "column",
-    width: "20%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginTop: 15,
+    gap: 16,
+    marginTop: 30,
+  },
+  title: {
+    color: "#f5f5f5",
+    fontSize: 24,
+    fontWeight: "600",
+  },
+  balanceCard: {
+    backgroundColor: "rgba(255, 255, 255, 0.08)",
+    borderRadius: 24,
+    padding: 20,
+    gap: 10,
+    alignItems: "flex-start",
+  },
+  subtleText: {
+    color: "#f5f5f5",
+    opacity: 0.7,
+    fontSize: 16,
+  },
+  balanceValue: {
+    color: "#f5f5f5",
+    fontSize: 40,
+    fontWeight: "700",
+  },
+  metaText: {
+    color: "#f5f5f5",
+    fontSize: 14,
+    opacity: 0.8,
+  },
+  card: {
+    backgroundColor: "#424674",
+    borderRadius: 28,
+    paddingHorizontal: 20,
+    paddingVertical: 22,
+    gap: 18,
+  },
+  cardTitle: {
+    color: "#f5f5f5",
+    fontSize: 18,
+    fontWeight: "600",
+  },
+  stakeAmount: {
+    color: "#f5f5f5",
+    fontSize: 48,
+    fontWeight: "700",
+    textAlign: "center",
+    borderWidth: 1,
+    borderColor: "rgba(245, 245, 245, 0.25)",
+    borderRadius: 28,
+    paddingVertical: 20,
+  },
+  description: {
+    color: "#f5f5f5",
+    fontSize: 16,
+    opacity: 0.85,
+    lineHeight: 22,
+    textAlign: "center",
+  },
+  primaryButton: {
+    backgroundColor: "#ffc000",
+    borderRadius: 32,
+    paddingVertical: 14,
+    alignItems: "center",
+  },
+  primaryText: {
+    color: Color.bg,
+    fontSize: 18,
+    fontWeight: "600",
+  },
+  homeButton: {
+    backgroundColor: "#f5f5f5",
+    borderRadius: 50,
+    padding: 14,
+    alignSelf: "center",
+    marginTop: 8,
   },
 });

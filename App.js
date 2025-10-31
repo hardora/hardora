@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import "./global";
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import SplashScreen from "./components/SplashScreen";
@@ -17,140 +18,143 @@ import DeviceInfo from "./components/DeviceInfo";
 import Settings from "./components/Settings";
 import ValidateStake from "./components/ValidateStake";
 import Staked from "./components/Staked";
+import { HederaProvider } from "./context/HederaContext";
 
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Splash"
-          component={SplashScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Home"
-          component={FirstScreen}
-          options={{
-            headerLeft: () => null,
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="SecondScreen"
-          component={SecondScreen}
-          options={{
-            headerLeft: () => null,
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="ThirdScreen"
-          component={ThirdScreen}
-          options={{
-            headerLeft: () => null,
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="Dashboard"
-          component={CreateWalletScreen}
-          options={{
-            headerLeft: () => null,
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="AccountDashboard"
-          component={HomeScreen}
-          options={{
-            headerLeft: () => null,
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="SetupWalletScreen"
-          component={SetupWalletScreen}
-          options={{
-            headerLeft: () => null,
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="Verify"
-          component={VerifyScreen}
-          options={{
-            headerLeft: () => null,
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="Proceed"
-          component={ProceedToHome}
-          options={{
-            headerLeft: () => null,
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="TrustedDevices"
-          component={ConnectTrustedDevices}
-          options={{
-            headerLeft: () => null,
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="StakeToken"
-          component={StakeToken}
-          options={{
-            headerLeft: () => null,
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="AccountInformation"
-          component={AccountInformation}
-          options={{
-            headerLeft: () => null,
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="DeviceInfo"
-          component={DeviceInfo}
-          options={{
-            headerLeft: () => null,
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="Settings"
-          component={Settings}
-          options={{
-            headerLeft: () => null,
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="ValidateStake"
-          component={ValidateStake}
-          options={{
-            headerLeft: () => null,
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="Staked"
-          component={Staked}
-          options={{
-            headerLeft: () => null,
-            headerShown: false,
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <HederaProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Splash"
+            component={SplashScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Home"
+            component={FirstScreen}
+            options={{
+              headerLeft: () => null,
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="SecondScreen"
+            component={SecondScreen}
+            options={{
+              headerLeft: () => null,
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="ThirdScreen"
+            component={ThirdScreen}
+            options={{
+              headerLeft: () => null,
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Dashboard"
+            component={CreateWalletScreen}
+            options={{
+              headerLeft: () => null,
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="AccountDashboard"
+            component={HomeScreen}
+            options={{
+              headerLeft: () => null,
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="SetupWalletScreen"
+            component={SetupWalletScreen}
+            options={{
+              headerLeft: () => null,
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Verify"
+            component={VerifyScreen}
+            options={{
+              headerLeft: () => null,
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Proceed"
+            component={ProceedToHome}
+            options={{
+              headerLeft: () => null,
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="TrustedDevices"
+            component={ConnectTrustedDevices}
+            options={{
+              headerLeft: () => null,
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="StakeToken"
+            component={StakeToken}
+            options={{
+              headerLeft: () => null,
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="AccountInformation"
+            component={AccountInformation}
+            options={{
+              headerLeft: () => null,
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="DeviceInfo"
+            component={DeviceInfo}
+            options={{
+              headerLeft: () => null,
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Settings"
+            component={Settings}
+            options={{
+              headerLeft: () => null,
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="ValidateStake"
+            component={ValidateStake}
+            options={{
+              headerLeft: () => null,
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Staked"
+            component={Staked}
+            options={{
+              headerLeft: () => null,
+              headerShown: false,
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </HederaProvider>
   );
 };
 

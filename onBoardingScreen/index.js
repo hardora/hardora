@@ -87,20 +87,20 @@ const CustomButtons = () => (
         pages={[
             {
                 backgroundColor: '#fff',
-                image: <Image source={require('../assets/images/computer.png')} />,
+                // image: <Image source={require('../assets/images/computer.png')} />,
                 title: 'Onboarding',
                 subtitle: 'Done with React Native Onboarding Swiper',
                 titleStyles: { color: 'red' }, // overwrite default color
             },
             {
                 backgroundColor: '#fe6e58',
-                image: <Image source={require('../assets/images/decentralized.png')} />,
+                // image: <Image source={require('../assets/images/decentralized.png')} />,
                 title: 'The Title',
                 subtitle: 'This is the subtitle that sumplements the title.',
             },
             {
                 backgroundColor: '#999',
-                image: <Image source={require('../assets/images/mobile-first.png')} />,
+                // image: <Image source={require('../assets/images/mobile-first.png')} />,
                 title: 'Triangle',
                 subtitle: "Beautiful, isn't it?",
                 subtitle: "Beautiful, isn't it?",

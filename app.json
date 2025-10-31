@@ -21,6 +21,12 @@
       "favicon": "./assets/images/app-logo.png"
     },
     "extra": {
+      "hedera": {
+        "mirrorNodeBaseUrl": "https://testnet.mirrornode.hedera.com/api/v1",
+        "apiKey": "",
+        "topicEndpoint": "https://liquid-hedera.onrender.com/api/v1/hardora/create-topic",
+        "accountCreationUrl": "https://liquid-hedera.onrender.com/api/v1/hardora/create"
+      },
       "eas": {
         "projectId": "02884827-4bd4-4ecd-a2a5-ce2063d1fcca"
       }

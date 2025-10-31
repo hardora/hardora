@@ -1,131 +1,151 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
-import { Image, Pressable } from "react-native";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Color } from "../constant/Color";
 
 export default function ConnectTrustedDevices() {
   const navigation = useNavigation();
-  function nextHandler() {
-    navigation.navigate("Proceed");
-  }
-  function nextHandlerHome() {
-    navigation.navigate("AccountDashboard");
-  }
+
+  const steps = [
+    "Insert the trusted device into the provided port.",
+    "Ensure the device status indicator shows a solid light.",
+    "Tap the connect button below to finalize pairing.",
+  ];
+
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.container}>
-        <View style={styles.row}>
+    <SafeAreaView style={styles.screen}>
+      <ScrollView
+        contentContainerStyle={styles.content}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.header}>
           <Ionicons
-            onPress={nextHandlerHome}
             name="arrow-back-outline"
-            color="white"
-            size={30}
+            color="#f5f5f5"
+            size={26}
+            onPress={() => navigation.navigate("AccountDashboard")}
           />
-          <Text style={styles.text}>Connect Trusted Device</Text>
+          <Text style={styles.title}>Connect Trusted Device</Text>
         </View>
 
-        <View style={styles.col}>
-          <Image source={require("../assets/images/cpu-setting.png")} />
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>Device Setup</Text>
           <Text style={styles.description}>
-            Please insert device and click the button below
+            Follow the steps below to securely connect your trusted device.
           </Text>
-        </View>
 
-        <View style={styles.buttonHolder}>
+          <View style={styles.steps}>
+            {steps.map((step, index) => (
+              <View style={styles.stepRow} key={step}>
+                <View style={styles.stepBadge}>
+                  <Text style={styles.stepIndex}>{index + 1}</Text>
+                </View>
+                <Text style={styles.stepText}>{step}</Text>
+              </View>
+            ))}
+          </View>
+
           <Pressable
-            onPress={nextHandlerHome}
-            style={
-              ([({ pressed }) => pressed && styles.pressed], styles.nextButton)
-            }
+            style={styles.primaryButton}
+            onPress={() => navigation.navigate("Proceed")}
           >
-            <View
-              style={{
-                marginHorizontal: 10,
-              }}
-            >
-              <Text style={styles.next}>Connect</Text>
-            </View>
+            <Text style={styles.primaryText}>Connect Device</Text>
           </Pressable>
         </View>
-        <Pressable onPress={nextHandlerHome}>
-          <View style={styles.home}>
-            <Ionicons name="home-outline" color="#f5f5f5" size={30} />
-          </View>
+
+        <Pressable
+          style={styles.homeButton}
+          onPress={() => navigation.navigate("AccountDashboard")}
+        >
+          <Ionicons name="home-outline" color="#f5f5f5" size={26} />
         </Pressable>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  pressed: {
-    opacity: 0.7,
-  },
-  row: {
-    flexDirection: "row",
-    marginHorizontal: 20,
-    justifyContent: "space-between",
-    marginVertical: 40,
-  },
-  col: {
-    flexDirection: "column",
-    marginHorizontal: 20,
-    justifyContent: "space-between",
-    marginVertical: 10,
-    alignItems: "center",
-  },
-  description: {
-    fontSize: 22,
-    textAlign: "center",
-    color: "white",
-    paddingHorizontal: 60,
-    marginVertical: 10,
-  },
-  nextButton: {
-    backgroundColor: "#ffc000",
-    padding: 5,
-    borderRadius: 35,
-    marginTop: 100,
-  },
-  next: {
-    backgroundColor: "#ffc000",
-    padding: 5,
-    borderRadius: 35,
-    fontSize: 24,
-    textAlign: "center",
-  },
-  text: {
-    fontSize: 24,
-    color: "white",
-  },
-  textBig: {
-    color: "white",
-    fontSize: 40,
-    textAlign: "center",
-    marginBottom: 20,
-  },
-  buttonHolder: {
-    borderRadius: 40,
-    marginVertical: 30,
-    paddingHorizontal: 60,
-    justifyContent: "center",
-  },
-  container: {
+  screen: {
     flex: 1,
     backgroundColor: Color.bg,
   },
-  home: {
-    backgroundColor: Color.bg,
-    borderRadius: 50,
-    padding: 15,
+  content: {
+    paddingHorizontal: 20,
+    paddingBottom: 32,
+    gap: 24,
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 16,
+    marginTop: 30,
+  },
+  title: {
+    color: "#f5f5f5",
+    fontSize: 24,
+    fontWeight: "600",
+  },
+  card: {
+    backgroundColor: "#424674",
+    borderRadius: 28,
+    paddingHorizontal: 20,
+    paddingVertical: 22,
+    gap: 18,
+  },
+  cardTitle: {
+    color: "#f5f5f5",
+    fontSize: 18,
+    fontWeight: "600",
+  },
+  description: {
+    color: "#f5f5f5",
+    opacity: 0.85,
+    fontSize: 16,
+    lineHeight: 22,
+  },
+  steps: {
+    gap: 16,
+  },
+  stepRow: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    gap: 12,
+  },
+  stepBadge: {
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    backgroundColor: "#ffc000",
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: "column",
-    width: "20%",
-    marginLeft: "auto",
-    marginRight: "auto",
+  },
+  stepIndex: {
+    color: Color.bg,
+    fontWeight: "700",
+  },
+  stepText: {
+    color: "#f5f5f5",
+    fontSize: 15,
+    flex: 1,
+    lineHeight: 22,
+  },
+  primaryButton: {
+    backgroundColor: "#ffc000",
+    borderRadius: 32,
+    paddingVertical: 14,
+    alignItems: "center",
+  },
+  primaryText: {
+    color: Color.bg,
+    fontSize: 18,
+    fontWeight: "600",
+  },
+  homeButton: {
+    backgroundColor: "#f5f5f5",
+    borderRadius: 50,
+    padding: 14,
+    alignSelf: "center",
+    marginTop: 8,
   },
 });

@@ -22,7 +22,7 @@ export default function ValidateStake() {
             onPress={nextHandlerBack}
             name="arrow-back-outline"
             color="#f5f5f5"
-            size={30}
+            size={26}
           />
         </View>
         <View style={styles.drop}>
@@ -35,10 +35,10 @@ export default function ValidateStake() {
           <TextInput style={styles.box}></TextInput>
           <TextInput style={styles.box}></TextInput>
         </View>
-        <ImageBackground
+        {/* <ImageBackground
           source={require("../assets/images/bg.png")}
           resizeMode="cover"
-        >
+        > */}
           <View style={styles.col}>
             <Text style={styles.text}>Staked: 10.00</Text>
           </View>
@@ -173,10 +173,10 @@ export default function ValidateStake() {
           </View>
           <Pressable onPress={nextHandler}>
             <View style={styles.home}>
-              <Ionicons name="home-outline" color="#f5f5f5" size={30} />
+              <Ionicons name="home-outline" color="#f5f5f5" size={26} />
             </View>
           </Pressable>
-        </ImageBackground>
+        {/* </ImageBackground> */}
       </View>
     </ScrollView>
   );
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffc000",
     padding: 5,
     borderRadius: 35,
-    fontSize: 24,
+    fontSize: 20,
     textAlign: "center",
   },
   textBig: {
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
   textBox: {
     width: "30%",
     color: "#f5f5f5",
-    fontSize: 24,
+    fontSize: 20,
     borderColor: "#ffc000",
     borderWidth: 1,
     padding: 10,
@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     color: "#f5f5f5",
-    fontSize: 24,
+    fontSize: 20,
     textAlign: "center",
     fontWeight: 700,
   },

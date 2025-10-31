@@ -1,171 +1,181 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
-import { Image, ImageBackground, Pressable } from "react-native";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Color } from "../constant/Color";
 
 export default function Staked() {
   const navigation = useNavigation();
-  function nextHandlerHome() {
-    navigation.navigate("AccountDashboard");
-  }
+
+  const summaryRows = [
+    { label: "Node ID", value: "0xad40234i...564bbb4" },
+    { label: "Date", value: "16/03/2023" },
+    { label: "Time", value: "09:23:01 am" },
+  ];
+
   return (
-    <ScrollView style={styles.container}>
-      <View>
-        <View style={styles.row}>
-          <Image source={require("../assets/images/logo_s.png")} />
+    <SafeAreaView style={styles.screen}>
+      <ScrollView
+        contentContainerStyle={styles.content}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.header}>
+          <Text style={styles.title}>Stake Submitted Successfully</Text>
         </View>
 
-        <View>
-          <Text style={styles.textBig}>Stake Submitted Successfully</Text>
+        <View style={styles.statusCard}>
+          <View style={styles.statusBadge}>
+            <Ionicons name="checkmark-done" color={Color.bg} size={30} />
+          </View>
+          <Text style={styles.statusText}>
+            Your stake has been recorded and is now active on the network.
+          </Text>
         </View>
 
-        <ImageBackground
-          source={require("../assets/images/bg.png")}
-          resizeMode="cover"
-        >
-          <View style={styles.col}>
-            <Image
-              source={require("../assets/images/success.png")}
-              style={{ width: 200, height: 200 }}
+        <View style={styles.card}>
+          <View style={styles.cardHeader}>
+            <Text style={styles.cardTitle}>Stake Summary</Text>
+            <Ionicons
+              name="copy-outline"
+              color="#ffc000"
+              size={22}
+              style={styles.iconButton}
             />
           </View>
 
-          <View style={styles.account}>
-            <View>
-              <View style={styles.rowed}>
-                <Text style={styles.text}>Amount Staked</Text>
-                <Ionicons
-                  style={styles.ion}
-                  name="copy-outline"
-                  color="#ffc000"
-                  size={30}
-                />
-              </View>
-              <View style={styles.accountInfo}>
-                <Image
-                  source={require("../assets/images/app-logo.png")}
-                  style={styles.logo}
-                />
-                <Text style={styles.amount}>10.0000</Text>
-              </View>
-              <View style={styles.line}>
-                <Text style={styles.textsm}>Equiv: $217.50</Text>
-              </View>
-            </View>
-            <View style={styles.drop}>
-              <View style={styles.rowed}>
-                <Text style={styles.text}>Node ID:</Text>
-                <Text style={styles.text}>0xad40234i...564bbb4</Text>
-              </View>
-              <View style={styles.rowed}>
-                <Text style={styles.text}>Date:</Text>
-                <Text style={styles.text}>16/03/2023</Text>
-              </View>
-              <View style={styles.rowed}>
-                <Text style={styles.text}>Time:</Text>
-                <Text style={styles.text}>09:23:01 am</Text>
-              </View>
-            </View>
+          <View style={styles.amountRow}>
+            <Text style={styles.amountLabel}>Amount Staked</Text>
+            <Text style={styles.amountValue}>10.0000</Text>
           </View>
+          <Text style={styles.meta}>Equiv: $217.50</Text>
 
-          <Pressable onPress={nextHandlerHome}>
-            <View style={styles.home}>
-              <Ionicons name="home-outline" color="#f5f5f5" size={30} />
-            </View>
-          </Pressable>
-        </ImageBackground>
-      </View>
-    </ScrollView>
+          <View style={styles.metaList}>
+            {summaryRows.map((row) => (
+              <View style={styles.metaRow} key={row.label}>
+                <Text style={styles.metaLabel}>{row.label}</Text>
+                <Text style={styles.metaValue}>{row.value}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
+
+        <Pressable
+          style={styles.homeButton}
+          onPress={() => navigation.navigate("AccountDashboard")}
+        >
+          <Ionicons name="home-outline" color="#f5f5f5" size={26} />
+        </Pressable>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  pressed: {
-    opacity: 0.7,
-  },
-  row: {
-    flexDirection: "row",
-    justifyContent: "center",
-    marginTop: 40,
-    marginBottom: 20,
-  },
-  logo: {
-    width: 20,
-    height: 20,
-  },
-  amount: {
-    color: "#f5f5f5",
-    marginHorizontal: 10,
-    fontSize: 40,
-    fontWeight: 700,
-  },
-  rowed: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginHorizontal: 10,
-  },
-  account: {
-    backgroundColor: "#424674",
-    marginHorizontal: 20,
-    paddingVertical: 15,
-    borderRadius: 40,
-  },
-  accountInfo: {
-    flexDirection: "row",
-    marginLeft: 30,
-    alignItems: "center",
-  },
-  line: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginHorizontal: 10,
-  },
-  col: {
-    alignItems: "center",
-  },
-  ion: {
-    marginRight: 20,
-  },
-  text: {
-    color: "#f5f5f5",
-    fontSize: 20,
-    marginHorizontal: 20,
-    marginVertical: 5,
-  },
-  textsm: {
-    color: "#f5f5f5",
-    fontSize: 14,
-    paddingHorizontal: 20,
-  },
-  textBig: {
-    color: "#f5f5f5",
-    fontSize: 24,
-    fontWeight: 500,
-    textAlign: "center",
-    marginHorizontal: 60,
-    marginTop: 20,
-  },
-  drop: {
-    marginTop: 20,
-  },
-  container: {
+  screen: {
     flex: 1,
     backgroundColor: Color.bg,
   },
-  home: {
-    backgroundColor: Color.bg,
-    borderRadius: 50,
-    padding: 15,
+  content: {
+    paddingHorizontal: 20,
+    paddingBottom: 32,
+    gap: 24,
+  },
+  header: {
+    marginTop: 40,
+    alignItems: "center",
+  },
+  title: {
+    color: "#f5f5f5",
+    fontSize: 24,
+    fontWeight: "600",
+    textAlign: "center",
+  },
+  statusCard: {
+    backgroundColor: "#424674",
+    borderRadius: 28,
+    paddingVertical: 26,
+    paddingHorizontal: 20,
+    alignItems: "center",
+    gap: 16,
+  },
+  statusBadge: {
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    backgroundColor: "#ffc000",
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: "column",
-    width: "20%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginTop: 15,
+  },
+  statusText: {
+    color: "#f5f5f5",
+    fontSize: 16,
+    lineHeight: 22,
+    textAlign: "center",
+    opacity: 0.9,
+  },
+  card: {
+    backgroundColor: "#424674",
+    borderRadius: 28,
+    paddingHorizontal: 20,
+    paddingVertical: 22,
+    gap: 16,
+  },
+  cardHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  cardTitle: {
+    color: "#f5f5f5",
+    fontSize: 18,
+    fontWeight: "600",
+  },
+  iconButton: {
+    padding: 6,
+  },
+  amountRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  amountLabel: {
+    color: "#f5f5f5",
+    fontSize: 16,
+    opacity: 0.85,
+  },
+  amountValue: {
+    color: "#f5f5f5",
+    fontSize: 32,
+    fontWeight: "700",
+  },
+  meta: {
+    color: "#f5f5f5",
+    fontSize: 14,
+    opacity: 0.8,
+    textAlign: "right",
+  },
+  metaList: {
+    gap: 12,
+  },
+  metaRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  metaLabel: {
+    color: "#f5f5f5",
+    opacity: 0.8,
+    fontSize: 16,
+  },
+  metaValue: {
+    color: "#f5f5f5",
+    fontSize: 16,
+    fontWeight: "500",
+  },
+  homeButton: {
+    backgroundColor: "#f5f5f5",
+    borderRadius: 50,
+    padding: 14,
+    alignSelf: "center",
   },
 });
